@@ -1,0 +1,17 @@
+domain    , availability_code, br           , us           , uk
+advantaiq ,                 5, available    , not available, available
+aitara    ,                 1, available    , not available, not available
+anteva    ,                 0, not available, not available, not available
+arealens  ,                 5, available    , not available, available
+arealis   ,                 0, not available, not available, not available
+areapeek  ,                 7, available    , available    , available
+areapick  ,                 5, available    , not available, available
+areasmart ,                 4, not available, not available, available
+areasmarty,                 7, available    , available    , available
+arely     ,                 4, not available, not available, available
+assara    ,                 5, available    , not available, available
+avanplace ,                 7, available    , available    , available
+avantra   ,                 0, not available, not available, not available
+avantro   ,                 5, available    , not available, available
+averra    ,                 0, not available, not available, not available
+avyra     ,                 0, not available, not available, not available
