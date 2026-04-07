@@ -1,17 +1,99 @@
-domain    , availability_code, br           , us           , uk
-advantaiq ,                 5, available    , not available, available
-aitara    ,                 1, available    , not available, not available
-anteva    ,                 0, not available, not available, not available
-arealens  ,                 5, available    , not available, available
-arealis   ,                 0, not available, not available, not available
-areapeek  ,                 7, available    , available    , available
-areapick  ,                 5, available    , not available, available
-areasmart ,                 4, not available, not available, available
-areasmarty,                 7, available    , available    , available
-arely     ,                 4, not available, not available, available
-assara    ,                 5, available    , not available, available
-avanplace ,                 7, available    , available    , available
-avantra   ,                 0, not available, not available, not available
-avantro   ,                 5, available    , not available, available
-averra    ,                 0, not available, not available, not available
-avyra     ,                 0, not available, not available, not available
+domain,availability_code,br,us,uk
+advantaiq,5,available,not available,available
+aitara,1,available,not available,not available
+anteva,0,not available,not available,not available
+arealens,5,available,not available,available
+arealis,0,not available,not available,not available
+areapeek,7,available,available,available
+areapick,5,available,not available,available
+areasmart,4,not available,not available,available
+areasmarty,7,available,available,available
+arely,4,not available,not available,available
+assara,5,available,not available,available
+avanplace,7,available,available,available
+avantra,0,not available,not available,not available
+avantro,5,available,not available,available
+averra,0,not available,not available,not available
+avyra,0,not available,not available,not available
+ceantara,7,available,available,available
+ceantra,5,available,not available,available
+civara,0,not available,not available,not available
+cleverland,1,available,not available,not available
+cleverpeek,7,available,available,available
+cleverpick,1,available,not available,not available
+comparea,1,available,not available,not available
+duira,5,available,not available,available
+flipflop,0,not available,not available,not available
+geovara,5,available,not available,available
+google,0,not available,not available,not available
+iqplace,5,available,not available,available
+iqvanta,5,available,not available,available
+latara,5,available,not available,available
+locantaiq,7,available,available,available
+locara,5,available,not available,available
+locavanta,7,available,available,available
+locentra,5,available,not available,available
+matchplace,4,not available,not available,available
+nexaro,0,not available,not available,not available
+orvanta,0,not available,not available,not available
+peekpost,5,available,not available,available
+pickarea,5,available,not available,available
+placanta,7,available,available,available
+placelens,5,available,not available,available
+placely,1,available,not available,not available
+placematch,1,available,not available,not available
+placera,5,available,not available,available
+placero,5,available,not available,available
+placeva,5,available,not available,available
+placewise,1,available,not available,not available
+placiq,5,available,not available,available
+placy,4,not available,not available,available
+plavant,7,available,available,available
+plintra,5,available,not available,available
+postpeek,5,available,not available,available
+postzip,5,available,not available,available
+praeva,1,available,not available,not available
+praevia,0,not available,not available,not available
+prosava,1,available,not available,not available
+prospex,0,not available,not available,not available
+realarea,5,available,not available,available
+realspot,1,available,not available,not available
+realty,0,not available,not available,not available
+realwise,1,available,not available,not available
+smartarea,5,available,not available,available
+smartland,0,not available,not available,not available
+smartspot,0,not available,not available,not available
+specara,5,available,not available,available
+specyn,7,available,available,available
+spotwise,4,not available,not available,available
+spoty,0,not available,not available,not available
+suivra,5,available,not available,available
+suoma,5,available,not available,available
+terrava,4,not available,not available,available
+terravanta,5,available,not available,available
+tirra,4,not available,not available,available
+vantaiq,5,available,not available,available
+vantara,0,not available,not available,not available
+vantaro,1,available,not available,not available
+vantica,5,available,not available,available
+vantiq,0,not available,not available,not available
+vantora,0,not available,not available,not available
+velora,0,not available,not available,not available
+vistra,0,not available,not available,not available
+vonara,0,not available,not available,not available
+vontaro,5,available,not available,available
+vontera,5,available,not available,available
+vonterra,5,available,not available,available
+vontra,5,available,not available,available
+wise2go,4,not available,not available,available
+wisearea,5,available,not available,available
+wiseco,0,not available,not available,not available
+wiseiq,5,available,not available,available
+wiselens,5,available,not available,available
+wisely,0,not available,not available,not available
+wiseplace,5,available,not available,available
+wisero,5,available,not available,available
+wisespot,5,available,not available,available
+wisetobe,7,available,available,available
+zentra,0,not available,not available,not available
+zonara,1,available,not available,not available
