@@ -46,10 +46,10 @@ docker-build: ## Build the container image (generates uv.lock if missing)
 	@$(COMPOSE_CMD) build
 
 .PHONY: docker-up
-docker-up: ## Start containers in detached mode
-	@echo "🚀 Starting containers"
+docker-up: ## Run domain checker once in container and write results.csv
+	@echo "🚀 Running domain checker (one-shot container)"
 	@test -n "$(COMPOSE_CMD)" || (echo "No container runtime found (docker or podman). Install docker or podman." >&2; exit 1)
-	@$(COMPOSE_CMD) up -d
+	@$(COMPOSE_CMD) run --rm domain-checker
 
 .PHONY: dev
 dev: docker-build ## Start a development container and leave it running for VSCode to attach

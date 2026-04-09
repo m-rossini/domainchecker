@@ -6,7 +6,6 @@ Output: CSV with status for each TLD
 """
 
 import socket
-import sys
 import csv
 import logging
 
@@ -19,33 +18,65 @@ WHOIS = {
 
 TIMEOUT = 10
 
+ERROR_PATTERNS = (
+    'quota',
+    'limit exceeded',
+    'query rate',
+    'temporarily unavailable',
+    'connection limit',
+    'try again later',
+    'timeout',
+)
+
+ERROR_PATTERNS_BY_TLD = {
+    # Verisign/.com specific throttling and abuse-control messages.
+    'com': (
+        'whois limit exceeded',
+        'exceeded your query quota',
+        'exceeded allowable query limits',
+        'exceeded the maximum allowable number of whois queries',
+    ),
+    'co.uk': (),
+    'com.br': (),
+}
+
+AVAILABLE_PATTERNS = {
+    'com': ('no match', 'not found'),
+    'co.uk': ('no match', 'not found'),
+    'com.br': ('no match', 'not found', 'disponivel', 'dispon\xedvel', 'available'),
+}
+
 def check_whois(domain, tld):
     """Return 'available' or 'not available' for domain.tld"""
     server, port = WHOIS[tld]
     try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(TIMEOUT)
-        sock.connect((server, port))
-        sock.send(f"{domain}.{tld}\r\n".encode())
-        response = b""
-        while True:
-            chunk = sock.recv(4096)
-            if not chunk:
-                break
-            response += chunk
-        sock.close()
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(TIMEOUT)
+            sock.connect((server, port))
+            sock.send(f"{domain}.{tld}\r\n".encode())
+            response = b""
+            while True:
+                chunk = sock.recv(4096)
+                if not chunk:
+                    break
+                response += chunk
+
+        if not response:
+            # Empty body from provider is not a valid availability signal.
+            return 'error'
+
         text = response.decode('utf-8', errors='ignore').lower()
 
-        # Check for "available" patterns
-        if tld == 'com':
-            if 'no match' in text or 'not found' in text:
-                return 'available'
-        elif tld == 'co.uk':
-            if 'no match' in text or 'not found' in text:
-                return 'available'
-        elif tld == 'com.br':
-            if 'no match' in text or 'available' in text:
-                return 'available'
+        # WHOIS providers may rate-limit and return error text with HTTP-like success.
+        if any(pattern in text for pattern in ERROR_PATTERNS):
+            return 'error'
+
+        if any(pattern in text for pattern in ERROR_PATTERNS_BY_TLD[tld]):
+            return 'error'
+
+        if any(pattern in text for pattern in AVAILABLE_PATTERNS[tld]):
+            return 'available'
+
         return 'not available'
     except Exception:
         return 'error'

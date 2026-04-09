@@ -4,4 +4,4 @@ services:
     container_name: domain-checker
     volumes:
       - .:/app:z  # :z flag enables SELinux relabeling for shared volumes
-    restart: unless-stopped
+    restart: no

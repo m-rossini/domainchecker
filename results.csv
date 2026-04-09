@@ -1,99 +1,213 @@
 domain,availability_code,br,us,uk
-advantaiq,5,available,not available,available
-aitara,1,available,not available,not available
-anteva,0,not available,not available,not available
-arealens,5,available,not available,available
-arealis,0,not available,not available,not available
-areapeek,7,available,available,available
-areapick,5,available,not available,available
-areasmart,4,not available,not available,available
-areasmarty,7,available,available,available
-arely,4,not available,not available,available
-assara,5,available,not available,available
-avanplace,7,available,available,available
-avantra,0,not available,not available,not available
-avantro,5,available,not available,available
-averra,0,not available,not available,not available
-avyra,0,not available,not available,not available
-ceantara,7,available,available,available
-ceantra,5,available,not available,available
-civara,0,not available,not available,not available
-cleverland,1,available,not available,not available
-cleverpeek,7,available,available,available
-cleverpick,1,available,not available,not available
-comparea,1,available,not available,not available
-duira,5,available,not available,available
-flipflop,0,not available,not available,not available
-geovara,5,available,not available,available
-google,0,not available,not available,not available
-iqplace,5,available,not available,available
-iqvanta,5,available,not available,available
-latara,5,available,not available,available
-locantaiq,7,available,available,available
-locara,5,available,not available,available
-locavanta,7,available,available,available
-locentra,5,available,not available,available
-matchplace,4,not available,not available,available
-nexaro,0,not available,not available,not available
-orvanta,0,not available,not available,not available
-peekpost,5,available,not available,available
-pickarea,5,available,not available,available
-placanta,7,available,available,available
-placelens,5,available,not available,available
-placely,1,available,not available,not available
-placematch,1,available,not available,not available
-placera,5,available,not available,available
-placero,5,available,not available,available
-placeva,5,available,not available,available
-placewise,1,available,not available,not available
-placiq,5,available,not available,available
-placy,4,not available,not available,available
-plavant,7,available,available,available
-plintra,5,available,not available,available
-postpeek,5,available,not available,available
-postzip,5,available,not available,available
-praeva,1,available,not available,not available
-praevia,0,not available,not available,not available
-prosava,1,available,not available,not available
-prospex,0,not available,not available,not available
-realarea,5,available,not available,available
-realspot,1,available,not available,not available
-realty,0,not available,not available,not available
-realwise,1,available,not available,not available
-smartarea,5,available,not available,available
-smartland,0,not available,not available,not available
-smartspot,0,not available,not available,not available
-specara,5,available,not available,available
-specyn,7,available,available,available
-spotwise,4,not available,not available,available
-spoty,0,not available,not available,not available
-suivra,5,available,not available,available
-suoma,5,available,not available,available
-terrava,4,not available,not available,available
-terravanta,5,available,not available,available
-tirra,4,not available,not available,available
-vantaiq,5,available,not available,available
-vantara,0,not available,not available,not available
-vantaro,1,available,not available,not available
-vantica,5,available,not available,available
-vantiq,0,not available,not available,not available
-vantora,0,not available,not available,not available
-velora,0,not available,not available,not available
-vistra,0,not available,not available,not available
-vonara,0,not available,not available,not available
-vontaro,5,available,not available,available
-vontera,5,available,not available,available
-vonterra,5,available,not available,available
-vontra,5,available,not available,available
-wise2go,4,not available,not available,available
-wisearea,5,available,not available,available
-wiseco,0,not available,not available,not available
-wiseiq,5,available,not available,available
-wiselens,5,available,not available,available
-wisely,0,not available,not available,not available
-wiseplace,5,available,not available,available
-wisero,5,available,not available,available
-wisespot,5,available,not available,available
-wisetobe,7,available,available,available
-zentra,0,not available,not available,not available
-zonara,1,available,not available,not available
+advantaiq,0,error,not available,error
+aitara,0,error,not available,error
+Analora,0,error,not available,error
+anteva,0,error,not available,error
+arealens,0,error,not available,error
+arealis,0,error,not available,error
+areapeek,2,error,available,error
+areapick,0,error,not available,error
+areasmart,0,error,not available,error
+areasmarty,2,error,available,error
+areawise,0,error,not available,error
+arely,0,error,not available,error
+Arexa,0,error,not available,error
+Arianta,0,error,not available,error
+assara,0,error,not available,error
+avanplace,2,error,available,error
+avantra,0,error,not available,error
+avantro,0,error,not available,error
+Aventra,0,error,not available,error
+averra,0,error,not available,error
+Avexra,0,error,not available,error
+avyra,0,error,not available,error
+Calora,0,error,not available,error
+ceantara,2,error,available,error
+ceantra,0,error,not available,error
+civara,0,error,not available,error
+cleverland,0,error,not available,error
+cleverpeek,2,error,available,error
+cleverpick,0,error,not available,error
+Cognara,0,error,not available,error
+Cognexa,0,error,not available,error
+comparea,0,error,not available,error
+duira,0,error,not available,error
+Elaro,0,error,not available,error
+Elvanta,0,error,not available,error
+Factaro,0,error,not available,error
+Factent,0,error,not available,error
+"Factiu,",2,not available,available,error
+Factora,0,error,not available,error
+Factra,0,error,not available,error
+Finda,0,error,not available,error
+Findaon,2,error,available,error
+Findara,0,error,not available,error
+Findaro,0,error,not available,error
+FindaroX,2,error,available,error
+Findent,0,error,not available,error
+Findentia,0,error,not available,error
+Findex,0,error,not available,error
+FindIQ,0,error,not available,error
+Findium,0,error,not available,error
+Findix,0,error,not available,error
+Findly,0,error,not available,error
+Findor,0,error,not available,error
+Findora,0,error,not available,error
+Findra,0,error,not available,error
+FindraIQ,0,error,error,error
+flipflop,0,error,not available,error
+geovara,0,error,not available,error
+google,0,error,not available,error
+Infera,0,error,not available,error
+Intara,0,error,not available,error
+iqplace,0,error,not available,error
+iqvanta,0,error,not available,error
+latara,0,error,not available,error
+Locamind,0,error,not available,error
+Locantae,2,error,available,error
+locantaiq,2,error,available,error
+locara,0,error,not available,error
+Locarion,0,error,not available,error
+locavanta,2,error,available,error
+locawise,0,error,not available,error
+locentra,0,error,not available,error
+Locira,0,error,not available,error
+mandora,0,error,not available,error
+matchplace,0,error,not available,error
+mindara,0,error,not available,error
+mindaro,0,error,not available,error
+Mindata,0,error,not available,error
+mindent,0,error,not available,error
+Mindentia,0,error,not available,error
+mindera,0,error,not available,error
+Mindex,0,error,not available,error
+MindIQ,0,error,not available,error
+Mindly,0,error,not available,error
+Mindlytics,0,error,not available,error
+Montra,0,error,not available,error
+Neuranta,0,error,not available,error
+nexaro,0,error,not available,error
+Noranta,0,error,not available,error
+Norexa,0,error,not available,error
+Noviqo,0,error,not available,error
+Omnara,0,error,not available,error
+Orenta,0,error,not available,error
+orvanta,0,error,not available,error
+peekpost,0,error,not available,error
+Percepta,0,error,not available,error
+pickarea,0,error,not available,error
+pickpost,0,error,not available,error
+placanta,2,error,available,error
+placelens,0,error,not available,error
+placely,0,error,not available,error
+placematch,0,error,not available,error
+placera,0,error,not available,error
+placero,0,error,not available,error
+placeva,0,error,not available,error
+placewise,0,error,not available,error
+placiq,0,error,not available,error
+placy,0,error,not available,error
+Plareaq,2,error,available,error
+plavant,2,error,available,error
+Plavantae,2,error,available,error
+plintra,0,error,not available,error
+Pointaro,0,error,not available,error
+Pointix,0,error,not available,error
+Pointra,0,error,not available,error
+postpeek,0,error,not available,error
+postzip,0,error,not available,error
+praeva,0,error,not available,error
+praevia,0,error,not available,error
+prosava,0,error,not available,error
+prospex,0,error,not available,error
+realarea,0,error,not available,error
+realspot,0,error,not available,error
+realty,0,error,not available,error
+realwise,0,error,not available,error
+Revanta,0,error,not available,error
+Scora,0,error,not available,error
+scoranta,2,error,available,error
+Score,0,error,not available,error
+scorent,0,error,not available,error
+scorion,0,error,not available,error
+scorix,0,error,not available,error
+scoro,0,error,not available,error
+scorvia,0,error,not available,error
+Selora,0,error,not available,error
+Sensiqo,0,error,not available,error
+smartarea,0,error,not available,error
+smartland,0,error,not available,error
+smartspot,0,error,not available,error
+specara,0,error,not available,error
+specyn,2,error,available,error
+spotwise,0,error,not available,error
+spoty,0,error,not available,error
+suivra,0,error,not available,error
+suoma,0,error,not available,error
+Synara,0,error,not available,error
+Tenara,0,error,not available,error
+Tenvora,0,error,not available,error
+terrava,0,error,not available,error
+terravanta,0,error,not available,error
+Terravax,0,error,not available,error
+Terriqo,0,error,not available,error
+Terronara,2,error,available,error
+Terronix,0,error,not available,error
+terrwise,2,error,available,error
+Thinkra,0,error,not available,error
+tirra,0,error,not available,error
+Valora,0,error,not available,error
+vantaiq,0,error,not available,error
+vantara,0,error,not available,error
+vantaro,0,error,not available,error
+vantica,0,error,not available,error
+vantiq,0,error,not available,error
+vantora,0,error,not available,error
+velora,0,error,not available,error
+Veltra,0,error,not available,error
+VilaCore,2,error,available,error
+vilaIQ,2,error,available,error
+vilanta,0,error,not available,error
+vilara,0,error,not available,error
+Vilarex,0,error,not available,error
+vilaro,0,error,not available,error
+VilaSense,0,error,not available,error
+vilentra,0,error,not available,error
+villara,0,error,not available,error
+villaro,0,error,not available,error
+vilora,0,error,not available,error
+Virexa,0,error,not available,error
+vistra,0,error,not available,error
+vonara,0,error,not available,error
+vontaro,0,error,not available,error
+vontera,0,error,not available,error
+vonterra,0,error,not available,error
+vontra,0,error,not available,error
+wisara,0,error,not available,error
+wisaro,0,error,not available,error
+wise2b,2,error,available,error
+wise2be,2,error,available,error
+wise2go,0,error,not available,error
+wisearea,0,error,not available,error
+wiseco,0,error,not available,error
+wiseiq,0,error,not available,error
+wiselens,0,error,not available,error
+wisely,0,error,not available,error
+wisentra,0,error,not available,error
+wiseon,0,error,not available,error
+wiseplace,0,error,not available,error
+wisera,0,error,not available,error
+wisero,0,error,not available,error
+wisespot,0,error,not available,error
+wisetobe,2,error,available,error
+wiseva,0,error,not available,error
+wysara,0,error,not available,error
+Xantara,0,error,not available,error
+Zentora,0,error,not available,error
+zentra,0,error,not available,error
+Zentraq,0,error,not available,error
+Zevanta,0,error,not available,error
+zonara,0,error,not available,error
+Zontera,0,error,not available,error
+Zontra,0,error,not available,error
+Zonvanta,0,error,not available,error
