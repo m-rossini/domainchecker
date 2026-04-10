@@ -104,35 +104,36 @@ def check_whois(domain, tld):
         logging.exception('ERROR [%s]: Unknown error for %s: %s', code, full_domain, reason)
         return 'error', code, reason
 
+def _parse_cache_file(f):
+    """Parse an open CSV file handle into the cache dictionary."""
+    cache = {}
+    content = f.read(1024)
+    f.seek(0)
+    if not content or 'domain,tld,status' not in content:
+        logging.warning('Permanent cache file is missing header or empty.')
+        return cache
+
+    reader = csv.DictReader(f)
+    for row in reader:
+        domain, tld = row.get('domain'), row.get('tld')
+        if domain and tld:
+            cache[f"{domain}.{tld}"] = {
+                'status': row.get('status', 'unknown'),
+                'reason': row.get('reason', ''),
+                'checked_at': row.get('checked_at', '')
+            }
+    return cache
+
 def load_permanent_cache():
     """Load existing successful/permanent results from CSV."""
-    cache = {}
     if not os.path.exists(PERMANENT_CACHE_FILE):
-        return cache
+        return {}
     try:
         with open(PERMANENT_CACHE_FILE, 'r', newline='') as f:
-            # Check if file has header
-            content = f.read(1024)
-            f.seek(0)
-            if not content or 'domain,tld,status' not in content:
-                logging.warning('Permanent cache file is missing header or empty. It will be recreated.')
-                return cache
-
-            reader = csv.DictReader(f)
-            for row in reader:
-                # Validate row before processing
-                if not row.get('domain') or not row.get('tld'):
-                    continue
-                # Key by full domain "example.com"
-                key = f"{row['domain']}.{row['tld']}"
-                cache[key] = {
-                    'status': row.get('status', 'unknown'),
-                    'reason': row.get('reason', ''),
-                    'checked_at': row.get('checked_at', '')
-                }
+            return _parse_cache_file(f)
     except Exception as e:
         logging.exception('Failed to load permanent cache: %s', e)
-    return cache
+    return {}
 
 def save_to_permanent_cache(domain, tld, status, reason):
     """Append a single result to the permanent cache file."""
@@ -154,8 +155,7 @@ def save_to_permanent_cache(domain, tld, status, reason):
         logging.exception('Failed to save to permanent cache for %s.%s: %s', domain, tld, e)
 
 def get_bases(input_file):
-    pass
-    # Read base domains
+    """Read base domains from input file."""
     try:
         with open(input_file) as f:
             bases = [line.strip() for line in f if line.strip()]
@@ -163,6 +163,85 @@ def get_bases(input_file):
         logging.exception('%s not found', input_file)
         return []
     return bases
+
+def initialize_environment():
+    """Configure basic environment setup like logging."""
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S'
+    )
+
+def get_active_tlds(countries_mask):
+    """
+    Validate bitmask and return filtered TLD list.
+    1=BR (com.br), 2=US (com), 4=UK (co.uk)
+    """
+    allowed_masks = range(1, 8)
+    if countries_mask not in allowed_masks:
+        logging.error('Invalid countries bitmask: %d. Use 1-7 (sum of: 1=BR, 2=US, 4=UK)', countries_mask)
+        sys.exit(1)
+
+    tlds = []
+    if countries_mask & 1: tlds.append((1, 'com.br', 'br'))
+    if countries_mask & 2: tlds.append((2, 'com', 'us'))
+    if countries_mask & 4: tlds.append((4, 'co.uk', 'uk'))
+    return tlds
+
+def resolve_domain_status(base, tld, permanent_cache, failed_tlds):
+    """
+    Resolve availability for a single domain.tld using Priority:
+    Cache -> Fail-Fast check -> Live Query.
+    """
+    full_domain = f"{base}.{tld}"
+    status = 'unknown'
+    reason = ""
+
+    # 1. Check permanent cache first
+    if full_domain in permanent_cache:
+        status = permanent_cache[full_domain]['status']
+        reason = permanent_cache[full_domain]['reason']
+        logging.info('CACHE HIT [%s]: %s', status, full_domain)
+        return status, reason
+
+    # 2. Skip if this TLD already failed during this session
+    if tld in failed_tlds:
+        status = 'error'
+        reason = "Skipped (previous error in this session)"
+        logging.warning('SKIPPING %s: TLD .%s already failed earlier this run.', full_domain, tld)
+        return status, reason
+
+    # 3. Single attempt query with pacing
+    time.sleep(PACING_DELAY)
+    status, code, reason = check_whois(base, tld)
+
+    if status != 'error':
+        # SUCCESS: Add to permanent cache immediately
+        save_to_permanent_cache(base, tld, status, reason)
+    else:
+        # ERROR: Mark TLD as failed for the rest of this run
+        failed_tlds.add(tld)
+        logging.error('STOPPING FUTURE ATTEMPTS for .%s due to ERROR [%s]: %s', tld, code, reason)
+
+    return status, reason
+
+def process_domain_row(base, tlds, countries_mask, permanent_cache, failed_tlds):
+    """Build a CSV result row for a single base domain."""
+    availability_mask = 0
+    statuses = []
+    reasons = []
+
+    for bit, tld, _ in tlds:
+        status, reason = resolve_domain_status(base, tld, permanent_cache, failed_tlds)
+        if status == 'available':
+            availability_mask |= bit
+        statuses.append(status)
+        reasons.append(reason)
+
+    row = [base, availability_mask]
+    row.extend(statuses)
+    row.extend(reasons)
+    return row
 
 def write_csv(results, output_file, tlds):
     try:
@@ -194,77 +273,25 @@ def parse_args():
 
 def main():
     args = parse_args()
-
-    # Configure basic logging level and format
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-    # Validate bitmask
-    allowed_masks = [1, 2, 3, 4, 5, 6, 7]
-    if args.countries not in allowed_masks:
-        logging.error('Invalid countries bitmask: %d. Use 1-7 (sum of: 1=BR, 2=US, 4=UK)', args.countries)
-        sys.exit(1)
+    initialize_environment()
 
     input_file = 'domains.txt'
     output_file = 'results.csv'
+
     bases = get_bases(input_file)
     if not bases:
         logging.error('No domains found in %s', input_file)
         sys.exit(1)
 
-    # Countries list (Bit, TLD, Label) - must match Makefile mapping
-    # 1=BR, 2=US, 4=UK
-    tlds = []
-    if args.countries & 1: tlds.append((1, 'com.br', 'br'))
-    if args.countries & 2: tlds.append((2, 'com', 'us'))
-    if args.countries & 4: tlds.append((4, 'co.uk', 'uk'))
-
+    tlds = get_active_tlds(args.countries)
     logging.info('Checking %d domains across %d regions ...', len(bases), len(tlds))
 
-    final_results = []
     permanent_cache = load_permanent_cache()
-
-    # Track TLDs that have encountered an error during this run to skip them entirely
     failed_tlds = set()
+    final_results = []
 
     for base in bases:
-        row = [base, args.countries]
-        statuses = []
-        reasons = []
-
-        for _, tld, _ in tlds:
-            full_domain = f"{base}.{tld}"
-            status = 'unknown'
-            reason = ""
-
-            # 1. Check permanent cache first
-            if full_domain in permanent_cache:
-                status = permanent_cache[full_domain]['status']
-                reason = permanent_cache[full_domain]['reason']
-                logging.info('CACHE HIT [%s]: %s', status, full_domain)
-            elif tld in failed_tlds:
-                # 2. Skip if this TLD already failed during this session
-                status = 'error'
-                reason = "Skipped (previous error in this session)"
-                logging.warning('SKIPPING %s: TLD .%s already failed earlier this run.', full_domain, tld)
-            else:
-                # 3. Single attempt query with pacing
-                time.sleep(PACING_DELAY)
-
-                status, code, reason = check_whois(base, tld)
-
-                if status != 'error':
-                    # SUCCESS: Add to permanent cache immediately
-                    save_to_permanent_cache(base, tld, status, reason)
-                else:
-                    # ERROR: Mark TLD as failed for the rest of this run
-                    failed_tlds.add(tld)
-                    logging.error('STOPPING FUTURE ATTEMPTS for .%s due to ERROR [%s]: %s', tld, code, reason)
-
-            statuses.append(status)
-            reasons.append(reason)
-
-        row.extend(statuses)
-        row.extend(reasons)
+        row = process_domain_row(base, tlds, args.countries, permanent_cache, failed_tlds)
         final_results.append(row)
 
     write_csv(final_results, output_file, tlds)
