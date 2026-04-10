@@ -35,7 +35,7 @@ Elaro
 Elvanta
 Factaro
 Factent
-Factiu,
+Factiu
 Factora
 Factra
 Finda
@@ -56,7 +56,6 @@ Findra
 FindraIQ
 flipflop
 geovara
-google
 Infera
 Intara
 iqplace

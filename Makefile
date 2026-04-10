@@ -1,7 +1,9 @@
+COUNTRIES ?= 7
+
 .PHONY: run
 run: ## Run the main script in the current environment. Usage: make run
-	@echo "🚀 Running main script in current environment"
-	@python src/DomainChecker/checkdomain.py
+	@echo "🚀 Running main script in current environment (Countries: $(COUNTRIES))"
+	@python src/DomainChecker/checkdomain.py --countries $(COUNTRIES)
 .PHONY: install
 install: ## Install the virtual environment and install the pre-commit hooks
 	@echo "🚀 Creating virtual environment using uv"
@@ -47,9 +49,9 @@ docker-build: ## Build the container image (generates uv.lock if missing)
 
 .PHONY: docker-up
 docker-up: ## Run domain checker once in container and write results.csv
-	@echo "🚀 Running domain checker (one-shot container)"
+	@echo "🚀 Running domain checker (one-shot container) (Countries: $(COUNTRIES))"
 	@test -n "$(COMPOSE_CMD)" || (echo "No container runtime found (docker or podman). Install docker or podman." >&2; exit 1)
-	@$(COMPOSE_CMD) run --rm domain-checker
+	@$(COMPOSE_CMD) run --rm domain-checker python src/DomainChecker/checkdomain.py --countries $(COUNTRIES)
 
 .PHONY: dev
 dev: docker-build ## Start a development container and leave it running for VSCode to attach
