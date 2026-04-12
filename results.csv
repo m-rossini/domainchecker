@@ -1,212 +1,310 @@
-domain,availability_code,br,us,uk,br_reason,us_reason,uk_reason
-advantaiq,1,available,not available,error,,,"no match for ""advantaiq.co.uk"".        this"
-aitara,1,available,not available,error,,,Skipped (previous error in this session)
-Analora,1,available,not available,error,,,Skipped (previous error in this session)
-anteva,0,not available,not available,error,,,Skipped (previous error in this session)
-arealens,1,available,not available,error,,,Skipped (previous error in this session)
-arealis,0,not available,not available,error,,,Skipped (previous error in this session)
-areapeek,3,available,available,error,,,Skipped (previous error in this session)
-areapick,1,available,not available,error,,,Skipped (previous error in this session)
-areasmart,0,not available,not available,error,,,Skipped (previous error in this session)
-areasmarty,3,available,available,error,,,Skipped (previous error in this session)
-areawise,1,available,not available,error,,,Skipped (previous error in this session)
-arely,0,not available,not available,error,,,Skipped (previous error in this session)
-Arexa,1,available,not available,error,,,Skipped (previous error in this session)
-Arianta,1,available,not available,error,,,Skipped (previous error in this session)
-assara,1,available,not available,error,,,Skipped (previous error in this session)
-avanplace,3,available,available,error,,,Skipped (previous error in this session)
-avantra,0,not available,not available,error,,,Skipped (previous error in this session)
-avantro,1,available,not available,error,,,Skipped (previous error in this session)
-Aventra,0,not available,not available,error,,,Skipped (previous error in this session)
-averra,0,not available,not available,error,,,Skipped (previous error in this session)
-Avexra,1,available,not available,error,,,Skipped (previous error in this session)
-avyra,0,not available,not available,error,,,Skipped (previous error in this session)
-Calora,0,not available,not available,error,,,Skipped (previous error in this session)
-ceantara,3,available,available,error,,,Skipped (previous error in this session)
-ceantra,1,available,not available,error,,,Skipped (previous error in this session)
-civara,0,not available,not available,error,,,Skipped (previous error in this session)
-cleverland,1,available,not available,error,,,Skipped (previous error in this session)
-cleverpeek,3,available,available,error,,,Skipped (previous error in this session)
-cleverpick,1,available,not available,error,,,Skipped (previous error in this session)
-Cognara,1,available,not available,error,,,Skipped (previous error in this session)
-Cognexa,0,not available,not available,error,,,Skipped (previous error in this session)
-comparea,1,available,not available,error,,,Skipped (previous error in this session)
-duira,1,available,not available,error,,,Skipped (previous error in this session)
-Elaro,0,not available,not available,error,,,Skipped (previous error in this session)
-Elvanta,1,available,not available,error,,,Skipped (previous error in this session)
-Factaro,1,available,not available,error,,,Skipped (previous error in this session)
-Factent,1,available,not available,error,,,Skipped (previous error in this session)
-Factiu,3,available,available,error,,,Skipped (previous error in this session)
-Factora,0,not available,not available,error,,,Skipped (previous error in this session)
-Factra,1,available,not available,error,,,Skipped (previous error in this session)
-Finda,0,not available,not available,error,,,Skipped (previous error in this session)
-Findaon,3,available,available,error,,,Skipped (previous error in this session)
-Findara,0,not available,not available,error,,,Skipped (previous error in this session)
-Findaro,1,available,not available,error,,,Skipped (previous error in this session)
-FindaroX,3,available,available,error,,,Skipped (previous error in this session)
-Findent,1,available,not available,error,,,Skipped (previous error in this session)
-Findentia,1,available,not available,error,,,Skipped (previous error in this session)
-Findex,0,error,not available,error,% copyright (c) nic.br - use of this data is gover,,Skipped (previous error in this session)
-FindIQ,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Findium,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Findix,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Findly,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Findor,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Findora,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Findra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-FindraIQ,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-flipflop,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-geovara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Infera,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Intara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-iqplace,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-iqvanta,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-latara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Locamind,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Locantae,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-locantaiq,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-locara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Locarion,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-locavanta,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-locawise,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-locentra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Locira,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-mandora,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-matchplace,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-mindara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-mindaro,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Mindata,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-mindent,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Mindentia,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-mindera,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Mindex,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-MindIQ,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Mindly,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Mindlytics,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Montra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Neuranta,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-nexaro,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Noranta,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Norexa,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Noviqo,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Omnara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Orenta,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-orvanta,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-peekpost,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Percepta,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-pickarea,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-pickpost,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-placanta,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-placelens,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-placely,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-placematch,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-placera,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-placero,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-placeva,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-placewise,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-placiq,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-placy,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Plareaq,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-plavant,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Plavantae,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-plintra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Pointaro,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Pointix,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Pointra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-postpeek,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-postzip,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-praeva,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-praevia,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-prosava,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-prospex,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-realarea,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-realspot,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-realty,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-realwise,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Revanta,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Scora,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-scoranta,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Score,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-scorent,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-scorion,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-scorix,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-scoro,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-scorvia,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Selora,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Sensiqo,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-smartarea,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-smartland,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-smartspot,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-specara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-specyn,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-spotwise,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-spoty,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-suivra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-suoma,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Synara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Tenara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Tenvora,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-terrava,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-terravanta,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Terravax,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Terriqo,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Terronara,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Terronix,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-terrwise,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Thinkra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-tirra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Valora,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vantaiq,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vantara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vantaro,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vantica,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vantiq,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vantora,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-velora,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Veltra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-VilaCore,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vilaIQ,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vilanta,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vilara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Vilarex,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vilaro,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-VilaSense,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vilentra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-villara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-villaro,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vilora,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Virexa,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vistra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vonara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vontaro,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vontera,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vonterra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-vontra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wisara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wisaro,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wise2b,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wise2be,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wise2go,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wisearea,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wiseco,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wiseiq,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wiselens,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wisely,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wisentra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wiseon,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wiseplace,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wisera,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wisero,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wisespot,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wisetobe,2,error,available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wiseva,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-wysara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Xantara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Zentora,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-zentra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Zentraq,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Zevanta,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-zonara,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Zontera,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Zontra,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
-Zonvanta,0,error,not available,error,Skipped (previous error in this session),,Skipped (previous error in this session)
+domain,availability_code,br,us,uk
+advantaiq,5,available,registered,available
+aitara,5,available,registered,available
+analora,5,available,registered,available
+anteva,4,registered,registered,available
+areaiq,4,not implemented,registered,available
+areakind,4,not implemented,registered,available
+arealens,5,available,registered,available
+arealis,0,registered,registered,
+arealyze,4,not implemented,registered,available
+areapeek,3,available,available,
+areapick,1,available,registered,
+areapulse,4,not implemented,registered,available
+areascore,4,not implemented,registered,available
+areasmart,0,registered,registered,
+areasmarty,3,available,available,
+areavibe,4,not implemented,registered,available
+areawise,1,available,registered,
+arely,0,registered,registered,
+arexa,1,available,registered,
+arianta,1,available,registered,
+assara,1,available,registered,
+auravibe,4,not implemented,registered,available
+avanplace,3,available,available,
+avantra,0,registered,registered,
+avantro,1,available,registered,
+aventra,0,registered,registered,
+averra,0,registered,registered,
+avexra,1,available,registered,
+avyra,0,registered,registered,
+blockrated,4,not implemented,registered,available
+blockvibe,4,not implemented,registered,available
+calora,4,registered,registered,available
+ceantara,7,available,available,available
+ceantra,5,available,registered,available
+civara,4,registered,registered,available
+civicscore,4,not implemented,registered,available
+cleverland,5,available,registered,available
+cleverpeek,7,available,available,available
+cleverpick,5,available,registered,available
+cognara,5,available,registered,available
+cognexa,4,registered,registered,available
+comparea,5,available,registered,available
+duira,5,available,registered,available
+elaro,4,registered,registered,available
+elvanta,5,available,registered,available
+factaro,5,available,registered,available
+factent,5,available,registered,available
+factiu,3,available,available,
+factora,4,registered,registered,available
+factra,5,available,registered,available
+finda,4,registered,registered,available
+findaon,7,available,available,available
+findara,4,registered,registered,available
+findaro,5,available,registered,available
+findarox,7,available,available,available
+findent,5,available,registered,available
+findentia,5,available,registered,available
+findex,4,not implemented,registered,available
+findiq,4,not implemented,registered,available
+findium,4,not implemented,registered,available
+findix,4,not implemented,registered,available
+findly,4,not implemented,registered,available
+findor,4,not implemented,registered,available
+findora,4,not implemented,registered,available
+findra,4,not implemented,registered,available
+findraiq,6,not implemented,available,available
+flipflop,4,not implemented,registered,available
+geonest,4,not implemented,registered,available
+geopulse,4,not implemented,registered,available
+geovara,4,not implemented,registered,available
+goodhood,4,not implemented,registered,available
+habio,4,not implemented,registered,available
+hoodly,4,not implemented,registered,available
+hoodradar,4,not implemented,registered,available
+hoodscore,4,not implemented,registered,available
+hoodvibe,4,not implemented,registered,available
+hubvibe,4,not implemented,registered,available
+infera,4,not implemented,registered,available
+intara,4,not implemented,registered,available
+iota,0,not implemented,,
+iqplace,4,not implemented,registered,available
+iqvanta,4,not implemented,registered,available
+latara,4,not implemented,registered,available
+livehere,4,not implemented,registered,available
+liverank,4,not implemented,registered,available
+livevibe,4,not implemented,registered,available
+localeiq,4,not implemented,registered,available
+localevibe,4,not implemented,registered,available
+localiq,4,not implemented,registered,available
+locamind,4,not implemented,registered,available
+locanex,4,not implemented,registered,available
+locantae,6,not implemented,available,available
+locantaiq,6,not implemented,available,available
+locara,4,not implemented,registered,available
+locarion,4,not implemented,registered,available
+locaroo,4,not implemented,registered,available
+locatee,4,not implemented,registered,available
+locatlas,4,not implemented,registered,available
+locavanta,6,not implemented,available,available
+locawise,4,not implemented,registered,available
+locent,4,not implemented,registered,available
+locentra,4,not implemented,registered,available
+locira,4,not implemented,registered,available
+locoscore,6,not implemented,available,available
+mandora,4,not implemented,registered,available
+mapfluence,4,not implemented,registered,available
+marcutcho,0,not implemented,,
+matchplace,4,not implemented,registered,available
+mindara,4,not implemented,registered,available
+mindaro,4,not implemented,registered,available
+mindata,4,not implemented,registered,available
+mindent,4,not implemented,registered,available
+mindentia,4,not implemented,registered,available
+mindera,4,not implemented,registered,available
+mindex,4,not implemented,registered,available
+mindiq,4,not implemented,registered,available
+mindly,4,not implemented,registered,available
+mindlytics,4,not implemented,registered,available
+montra,4,not implemented,registered,available
+narister,0,not implemented,,
+neargood,4,not implemented,registered,available
+neighbly,4,not implemented,registered,available
+neighborn,4,not implemented,registered,available
+neighbourgood,4,not implemented,registered,available
+neighbourly,4,not implemented,registered,available
+neighbourscore,6,not implemented,available,available
+neighbri,4,not implemented,registered,available
+neighbvibe,6,not implemented,available,available
+neighlo,6,not implemented,available,available
+neighlytics,6,not implemented,available,available
+nestiq,4,not implemented,registered,available
+nestly,4,not implemented,registered,available
+neuranta,4,not implemented,registered,available
+nexaro,4,not implemented,registered,available
+noranta,4,not implemented,registered,available
+norexa,4,not implemented,registered,available
+noviqo,4,not implemented,registered,available
+omnara,4,not implemented,registered,available
+orenta,4,not implemented,registered,available
+orvanta,4,not implemented,registered,available
+patchly,4,not implemented,registered,available
+peekpost,4,not implemented,registered,available
+pepito,0,not implemented,,
+percepta,4,not implemented,registered,available
+pickarea,4,not implemented,registered,available
+pickpost,4,not implemented,registered,available
+placanta,6,not implemented,available,available
+placelens,4,not implemented,registered,available
+placely,4,not implemented,registered,available
+placematch,4,not implemented,registered,available
+placeo,4,not implemented,registered,available
+placepulse,4,not implemented,registered,available
+placera,4,not implemented,registered,available
+placero,4,not implemented,registered,available
+placeva,4,not implemented,registered,available
+placewise,4,not implemented,registered,available
+placiq,4,not implemented,registered,available
+placy,4,not implemented,registered,available
+plareaq,6,not implemented,available,available
+plavant,6,not implemented,available,available
+plavantae,6,not implemented,available,available
+plintra,4,not implemented,registered,available
+pointaro,4,not implemented,registered,available
+pointix,4,not implemented,registered,available
+pointra,4,not implemented,registered,available
+postalpulse,4,not implemented,registered,available
+postcodepulse,4,not implemented,registered,available
+postiq,4,not implemented,registered,available
+postlytic,4,not implemented,registered,available
+postpeek,4,not implemented,registered,available
+postvibe,4,not implemented,registered,available
+postzip,4,not implemented,registered,available
+praeva,4,not implemented,registered,available
+praevia,4,not implemented,registered,available
+prosava,4,not implemented,registered,available
+prospex,4,not implemented,registered,available
+pulsarea,4,not implemented,registered,available
+pulsaria,4,not implemented,registered,available
+pulsevibe,4,not implemented,registered,available
+realarea,4,not implemented,registered,available
+realspot,4,not implemented,registered,available
+realty,4,not implemented,registered,available
+realwise,4,not implemented,registered,available
+revanta,4,not implemented,registered,available
+scenevibe,4,not implemented,registered,available
+scora,4,not implemented,registered,available
+scoranta,6,not implemented,available,available
+score,4,not implemented,registered,available
+scorent,4,not implemented,registered,available
+scorion,4,not implemented,registered,available
+scorix,4,not implemented,registered,available
+scoro,4,not implemented,registered,available
+scorvia,4,not implemented,registered,available
+selora,4,not implemented,registered,available
+sensiqo,4,not implemented,registered,available
+smartarea,4,not implemented,registered,available
+smartland,4,not implemented,registered,available
+smartspot,4,not implemented,registered,available
+specara,4,not implemented,registered,available
+specyn,6,not implemented,available,available
+spotgrade,4,not implemented,registered,available
+spotly,4,not implemented,registered,available
+spotscore,4,not implemented,registered,available
+spotvibe,4,not implemented,registered,available
+spotwise,4,not implemented,registered,available
+spoty,4,not implemented,registered,available
+streetwise,4,not implemented,registered,available
+suivra,4,not implemented,registered,available
+suoma,4,not implemented,registered,available
+synara,4,not implemented,registered,available
+tenara,4,not implemented,registered,available
+tenvora,4,not implemented,registered,available
+terrava,4,not implemented,registered,available
+terravanta,4,not implemented,registered,available
+terravax,4,not implemented,registered,available
+terriqo,4,not implemented,registered,available
+terronara,6,not implemented,available,available
+terronix,4,not implemented,registered,available
+terrwise,6,not implemented,available,available
+thinkra,4,not implemented,registered,available
+thrivemap,4,not implemented,registered,available
+thrivevibe,4,not implemented,registered,available
+tirra,4,not implemented,registered,available
+urbaniq,4,not implemented,registered,available
+urbanivo,4,not implemented,registered,available
+urbanpulse,4,not implemented,registered,available
+urbintel,4,not implemented,registered,available
+urbix,4,not implemented,registered,available
+valora,4,not implemented,registered,available
+vantaiq,4,not implemented,registered,available
+vantara,4,not implemented,registered,available
+vantaro,4,not implemented,registered,available
+vantica,4,not implemented,registered,available
+vantiq,4,not implemented,registered,available
+vantora,4,not implemented,registered,available
+velora,4,not implemented,registered,available
+veltra,4,not implemented,registered,available
+vibecheck,4,not implemented,registered,available
+vibehood,4,not implemented,registered,available
+vibely,4,not implemented,registered,available
+vibemap,4,not implemented,registered,available
+vibepulse,4,not implemented,registered,available
+vibescope,4,not implemented,registered,available
+vibespot,4,not implemented,registered,available
+vibezip,4,not implemented,registered,available
+vibra,4,not implemented,registered,available
+vilacore,6,not implemented,available,available
+vilaiq,6,not implemented,available,available
+vilanta,4,not implemented,registered,available
+vilara,4,not implemented,registered,available
+vilarex,4,not implemented,registered,available
+vilaro,4,not implemented,registered,available
+vilasense,4,not implemented,registered,available
+vilentra,4,not implemented,registered,available
+villara,4,not implemented,registered,available
+villaro,4,not implemented,registered,available
+vilora,4,not implemented,registered,available
+virexa,4,not implemented,registered,available
+vistra,4,not implemented,registered,available
+vistria,4,not implemented,registered,available
+vonara,4,not implemented,registered,available
+vontaro,4,not implemented,registered,available
+vontera,4,not implemented,registered,available
+vonterra,4,not implemented,registered,available
+vontra,4,not implemented,registered,available
+wisara,4,not implemented,registered,available
+wisaro,4,not implemented,registered,available
+wise2b,6,not implemented,available,available
+wise2be,6,not implemented,available,available
+wise2go,4,not implemented,registered,available
+wisearea,4,not implemented,registered,available
+wiseco,4,not implemented,registered,available
+wiseiq,4,not implemented,registered,available
+wiselens,4,not implemented,registered,available
+wisely,4,not implemented,registered,available
+wisentra,4,not implemented,registered,available
+wiseon,4,not implemented,registered,available
+wiseplace,4,not implemented,registered,available
+wisera,4,not implemented,registered,available
+wisero,4,not implemented,registered,available
+wisespot,4,not implemented,registered,available
+wisetobe,6,not implemented,available,available
+wiseva,4,not implemented,registered,available
+wisevibe,4,not implemented,registered,available
+wysara,4,not implemented,registered,available
+xantara,4,not implemented,registered,available
+zentora,4,not implemented,registered,available
+zentra,4,not implemented,registered,available
+zentraq,4,not implemented,registered,available
+zentro,4,not implemented,registered,available
+zentromap,6,not implemented,available,available
+zevanta,4,not implemented,registered,available
+ziplens,4,not implemented,registered,available
+ziplo,4,not implemented,registered,available
+ziplytics,4,not implemented,registered,available
+zipmosaic,6,not implemented,available,available
+zippora,4,not implemented,registered,available
+zippy,4,not implemented,registered,available
+zipvibe,4,not implemented,registered,available
+zivio,4,not implemented,registered,available
+zivora,4,not implemented,registered,available
+zonara,4,not implemented,registered,available
+zonecheck,4,not implemented,registered,available
+zonevibe,4,not implemented,registered,available
+zonewise,4,not implemented,registered,available
+zontera,4,not implemented,registered,available
+zontra,4,not implemented,registered,available
+zonvanta,4,not implemented,registered,available
+zooma,4,not implemented,registered,available

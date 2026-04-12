@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""
-Simple domain availability checker for .com (US), .co.uk (UK), .com.br (Brazil)
-Input file: one base domain per line (e.g., "example")
-Output: CSV with status for each TLD
-"""
-
+# -*- coding: utf-8 -*-
 import argparse
 import csv
 import logging
@@ -12,21 +7,31 @@ import os
 import socket
 import sys
 import time
+import urllib.request
+from urllib.error import HTTPError
 from datetime import datetime
+from dataclasses import dataclass
+from typing import Optional, List, Dict, Set
 
-# WHOIS servers
-WHOIS = {
+# RDAP Endpoints
+RDAP_ENDPOINTS = {
+    'com': 'https://rdap.verisign.com/com/v1/',
+    'co.uk': 'https://rdap.nominet.uk/uk/v1/'
+}
+
+# Legacy WHOIS servers
+WHOIS_SERVERS = {
     'com': ('whois.verisign-grs.com', 43),
-    'co.uk': ('whois.nic.uk', 43),
-    'com.br': ('whois.registro.br', 43)
+    'co.uk': ('whois.nic.uk', 43)
 }
 
 TIMEOUT = 10
-PACING_DELAY = 1.0  # 1 second between requests
-MAX_RETRIES = 3
-BACKOFF_FACTOR = 2
-
+PACING_DELAY = 1.0
 PERMANENT_CACHE_FILE = 'permanent_results.csv'
+CACHE_ONLY_TLDS = ('com.br',)
+
+ERROR_PATTERNS = ('quota', 'limit exceeded', 'query rate', 'temporarily unavailable', 'try again later')
+AVAILABLE_PATTERNS = ('no match', 'not found', 'disponivel', 'available')
 
 ERROR_CODES = {
     'TIMEOUT': 'E001',
@@ -36,267 +41,257 @@ ERROR_CODES = {
     'UNKNOWN': 'E005',
 }
 
-ERROR_PATTERNS = (
-    'quota',
-    'limit exceeded',
-    'query rate',
-    'temporarily unavailable',
-    'connection limit',
-    'try again later',
-    'timeout',
-    'whois limit exceeded',
-    'exceeded your query quota',
-    'exceeded allowable query limits',
-    'exceeded the maximum allowable number of whois queries',
-)
+@dataclass
+class CheckResult:
+    status: str  # 'available', 'registered', 'error', 'unknown', 'not implemented'
+    reason: str = ''
+    error_code: Optional[str] = None
+    is_cache_hit: bool = False
 
-AVAILABLE_PATTERNS = ('no match', 'not found', 'disponivel', 'dispon\xedvel', 'available')
+# --- Protocols ---
 
-def check_whois(domain, tld):
-    """Return (status, error_code, reason) for domain.tld"""
-    server, port = WHOIS[tld]
-    full_domain = f"{domain}.{tld}"
-    try:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-            sock.settimeout(TIMEOUT)
-            sock.connect((server, port))
-            sock.send(f"{full_domain}\r\n".encode())
-            response = b""
-            while True:
-                chunk = sock.recv(4096)
-                if not chunk:
-                    break
-                response += chunk
+class Protocol:
+    def check(self, domain_base: str, tld: str) -> CheckResult:
+        raise NotImplementedError()
 
-        if not response:
-            code = ERROR_CODES['EMPTY_RESP']
-            reason = "Empty response from server"
-            logging.error('ERROR [%s]: %s for %s', code, reason, full_domain)
-            return 'error', code, reason
+class RDAPProtocol(Protocol):
+    def __init__(self, endpoints: Dict[str, str], timeout: int):
+        self.endpoints = endpoints
+        self.timeout = timeout
 
-        text = response.decode('utf-8', errors='ignore').lower()
+    def check(self, domain_base: str, tld: str) -> CheckResult:
+        endpoint = self.endpoints.get(tld)
+        if not endpoint:
+            return CheckResult(status='error', reason=f'No RDAP endpoint for {tld}')
 
-        # WHOIS providers may rate-limit and return error text with HTTP-like success.
-        if any(pattern in text for pattern in ERROR_PATTERNS):
-            code = ERROR_CODES['RATE_LIMIT']
-            reason = text[:50].replace('\n', ' ').replace('\r', ' ').strip()
-            logging.error('ERROR [%s]: Rate limit/quota exceeded for %s: %s', code, full_domain, reason)
-            return 'error', code, reason
+        url = f'{endpoint}domain/{domain_base}.{tld}'
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=self.timeout) as response:
+                if response.status == 200:
+                    return CheckResult(status='registered')
+        except HTTPError as e:
+            if e.code == 404:
+                return CheckResult(status='available')
+            return CheckResult(status='error', reason=f'HTTP Error {e.code}', error_code=ERROR_CODES['CONN_ERR'])
+        except Exception as e:
+            return CheckResult(status='error', reason=str(e), error_code=ERROR_CODES['UNKNOWN'])
+        return CheckResult(status='unknown', reason='Unexpected response', error_code=ERROR_CODES['UNKNOWN'])
 
-        if any(pattern in text for pattern in AVAILABLE_PATTERNS):
-            return 'available', None, ""
-        else:
-            return 'not available', None, ""
+class WhoisProtocol(Protocol):
+    def __init__(self, servers: Dict[str, tuple], timeout: int):
+        self.servers = servers
+        self.timeout = timeout
 
-    except TimeoutError:
-        code = ERROR_CODES['TIMEOUT']
-        reason = "Socket timeout"
-        logging.exception('ERROR [%s]: %s for %s', code, reason, full_domain)
-        return 'error', code, reason
-    except OSError as e:
-        code = ERROR_CODES['CONN_ERR']
-        reason = str(e)
-        logging.exception('ERROR [%s]: Connection error for %s: %s', code, full_domain, reason)
-        return 'error', code, reason
-    except Exception as e:
-        code = ERROR_CODES['UNKNOWN']
-        reason = str(e)
-        logging.exception('ERROR [%s]: Unknown error for %s: %s', code, full_domain, reason)
-        return 'error', code, reason
+    def check(self, domain_base: str, tld: str) -> CheckResult:
+        if tld not in self.servers:
+            return CheckResult(status='unknown', reason=f'No WHOIS server for {tld}', error_code=ERROR_CODES['UNKNOWN'])
 
-def _parse_cache_file(f):
-    """Parse an open CSV file handle into the cache dictionary."""
-    cache = {}
-    content = f.read(1024)
-    f.seek(0)
-    if not content or 'domain,tld,status' not in content:
-        logging.warning('Permanent cache file is missing header or empty.')
+        server, port = self.servers[tld]
+        full_domain = f'{domain_base}.{tld}'
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                sock.settimeout(self.timeout)
+                sock.connect((server, port))
+                sock.send(f'{full_domain}\r\n'.encode())
+                response = b''
+                while True:
+                    chunk = sock.recv(4096)
+                    if not chunk: break
+                    response += chunk
+
+            if not response:
+                return CheckResult(status='error', reason='Empty response', error_code=ERROR_CODES['EMPTY_RESP'])
+
+            text = response.decode('utf-8', errors='ignore').lower()
+            if any(p in text for p in ERROR_PATTERNS):
+                return CheckResult(status='error', reason='Rate limit', error_code=ERROR_CODES['RATE_LIMIT'])
+            if any(p in text for p in AVAILABLE_PATTERNS):
+                return CheckResult(status='available')
+            return CheckResult(status='registered')
+        except Exception as e:
+            return CheckResult(status='error', reason=str(e), error_code=ERROR_CODES['UNKNOWN'])
+
+# --- Storage ---
+
+class CacheRepository:
+    def __init__(self, file_path: str):
+        self.file_path = file_path
+        self.cache = self._load()
+
+    def _load(self) -> Dict[str, Dict]:
+        if not os.path.exists(self.file_path):
+            logging.info('No permanent cache file found.')
+            return {}
+        cache = {}
+        try:
+            with open(self.file_path, 'r', newline='') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    domain, tld = row.get('domain'), row.get('tld')
+                    if domain and tld:
+                        # Normalize keys to lowercase for case-insensitive caching
+                        cache[f"{domain.lower()}.{tld.lower()}"] = row
+            logging.info('Permanent cache loaded: %d entries', len(cache))
+        except Exception as e:
+            logging.error('Failed to load cache: %s', e)
         return cache
 
-    reader = csv.DictReader(f)
-    for row in reader:
-        domain, tld = row.get('domain'), row.get('tld')
-        if domain and tld:
-            cache[f"{domain}.{tld}"] = {
-                'status': row.get('status', 'unknown'),
-                'reason': row.get('reason', ''),
-                'checked_at': row.get('checked_at', '')
-            }
-    return cache
+    def get(self, domain_base: str, tld: str) -> Optional[CheckResult]:
+        full_domain = f"{domain_base.lower()}.{tld.lower()}"
+        if full_domain in self.cache:
+            row = self.cache[full_domain]
+            return CheckResult(
+                status=row['status'],
+                reason=row.get('reason', ''),
+                is_cache_hit=True
+            )
+        return None
 
-def load_permanent_cache():
-    """Load existing successful/permanent results from CSV."""
-    if not os.path.exists(PERMANENT_CACHE_FILE):
-        return {}
-    try:
-        with open(PERMANENT_CACHE_FILE, 'r', newline='') as f:
-            return _parse_cache_file(f)
-    except Exception as e:
-        logging.exception('Failed to load permanent cache: %s', e)
-    return {}
+    def set(self, domain_base: str, tld: str, result: CheckResult):
+        if result.status in ('error', 'unknown', 'not implemented'):
+            return
+        
+        full_domain = f"{domain_base.lower()}.{tld.lower()}"
+        self.cache[full_domain] = {
+            'domain': domain_base.lower(),
+            'tld': tld.lower(),
+        }
 
-def save_to_permanent_cache(domain, tld, status, reason):
-    """Append a single result to the permanent cache file."""
-    file_exists = os.path.exists(PERMANENT_CACHE_FILE)
-    try:
-        with open(PERMANENT_CACHE_FILE, 'a', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=['domain', 'tld', 'status', 'reason', 'checked_at'])
-            if not file_exists:
+    def persist(self):
+        rows = list(self.cache.values())
+        rows.sort(key=lambda x: (x['domain'].lower(), x['tld'].lower()))
+        try:
+            with open(self.file_path, 'w', newline='') as f:
+                writer = csv.DictWriter(f, fieldnames=['domain', 'tld', 'status', 'reason', 'checked_at'])
                 writer.writeheader()
-            writer.writerow({
-                'domain': domain,
-                'tld': tld,
-                'status': status,
-                'reason': reason,
-                'checked_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            })
-            f.flush()  # Ensure it's written to disk immediately
-    except Exception as e:
-        logging.exception('Failed to save to permanent cache for %s.%s: %s', domain, tld, e)
+                writer.writerows(rows)
+            logging.info('Permanent cache saved and sorted: Total entries: %d', len(rows))
+        except Exception as e:
+            logging.error('Failed to save cache: %s', e)
 
-def get_bases(input_file):
-    """Read base domains from input file."""
-    try:
-        with open(input_file) as f:
-            bases = [line.strip() for line in f if line.strip()]
-    except FileNotFoundError:
-        logging.exception('%s not found', input_file)
-        return []
-    return bases
+# --- Handlers ---
 
-def initialize_environment():
-    """Configure basic environment setup like logging."""
+class TLDHandler:
+    def __init__(self, bit: int, tld: str, label: str):
+        self.bit = bit
+        self.tld = tld
+        self.label = label
+
+    def check(self, domain_base: str, repository: CacheRepository) -> CheckResult:
+        # Standard cache lookup first
+        result = repository.get(domain_base, self.tld)
+        if result:
+            logging.info('CACHE HIT [%s]: %s.%s', result.status, domain_base, self.tld)
+            return result
+
+        result = self._do_check(domain_base, repository)
+        if not result.is_cache_hit:
+            repository.set(domain_base, self.tld, result)
+        return result
+
+    def _do_check(self, domain_base: str, repository: CacheRepository) -> CheckResult:
+        raise NotImplementedError()
+
+class CacheOnlyHandler(TLDHandler):
+    def _do_check(self, domain_base: str, repository: CacheRepository) -> CheckResult:
+        return CheckResult(
+            status='not implemented',
+            reason=f'Not in cache ({self.tld} is cache-only)'
+        )
+
+class ActiveTLDHandler(TLDHandler):
+    def __init__(self, bit: int, tld: str, label: str, protocol: Protocol, pacing_delay: float):
+        super().__init__(bit, tld, label)
+        self.protocol = protocol
+        self.pacing_delay = pacing_delay
+        self.failed = False
+
+    def _do_check(self, domain_base: str, repository: CacheRepository) -> CheckResult:
+        if self.failed:
+            return CheckResult(status='error', reason='Skipped due to prior TLD error')
+
+        full_domain = f"{domain_base}.{self.tld}"
+        result = self.protocol.check(domain_base, self.tld)
+        logging.info('Result for %s: %s %s', full_domain, result.status, f"({result.reason})" if result.reason else "")
+
+        if result.status == 'error':
+            self.failed = True
+            logging.warning('CIRCUIT BREAKER: Stopping active checks for %s due to error.', self.tld)
+
+        time.sleep(self.pacing_delay)
+        return result
+
+# --- Engine ---
+
+class DomainCheckerEngine:
+    def __init__(self, handlers: List[TLDHandler], repository: CacheRepository):
+        self.handlers = handlers
+        self.repository = repository
+
+    def run(self, bases: List[str]) -> List[Dict]:
+        logging.info('Processing %d base domains across %d handlers.', len(bases), len(self.handlers))
+        results = []
+        for base in bases:
+            row_data = {'domain': base, 'availability_code': 0}
+            for handler in self.handlers:
+                result = handler.check(base, self.repository)
+                row_data[handler.label] = result.status
+                if result.status == 'available':
+                    row_data['availability_code'] |= handler.bit
+            results.append(row_data)
+        return results
+
+def main():
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(levelname)s - %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S'
     )
 
-def get_active_tlds(countries_mask):
-    """
-    Validate bitmask and return filtered TLD list.
-    1=BR (com.br), 2=US (com), 4=UK (co.uk)
-    """
-    allowed_masks = range(1, 8)
-    if countries_mask not in allowed_masks:
-        logging.error('Invalid countries bitmask: %d. Use 1-7 (sum of: 1=BR, 2=US, 4=UK)', countries_mask)
-        sys.exit(1)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--countries', type=int, default=7)
+    args = parser.parse_args()
+    logging.info('Execution started with arguments: countries=%d', args.countries)
 
-    tlds = []
-    if countries_mask & 1: tlds.append((1, 'com.br', 'br'))
-    if countries_mask & 2: tlds.append((2, 'com', 'us'))
-    if countries_mask & 4: tlds.append((4, 'co.uk', 'uk'))
-    return tlds
+    # Wire up components
+    repository = CacheRepository(PERMANENT_CACHE_FILE)
+    rdap_protocol = RDAPProtocol(RDAP_ENDPOINTS, TIMEOUT)
 
-def resolve_domain_status(base, tld, permanent_cache, failed_tlds):
-    """
-    Resolve availability for a single domain.tld using Priority:
-    Cache -> Fail-Fast check -> Live Query.
-    """
-    full_domain = f"{base}.{tld}"
-    status = 'unknown'
-    reason = ""
+    handlers: List[TLDHandler] = []
+    if args.countries & 1:
+        handlers.append(CacheOnlyHandler(1, 'com.br', 'br'))
+    if args.countries & 2:
+        handlers.append(ActiveTLDHandler(2, 'com', 'us', rdap_protocol, PACING_DELAY))
+    if args.countries & 4:
+        handlers.append(ActiveTLDHandler(4, 'co.uk', 'uk', rdap_protocol, PACING_DELAY))
 
-    # 1. Check permanent cache first
-    if full_domain in permanent_cache:
-        status = permanent_cache[full_domain]['status']
-        reason = permanent_cache[full_domain]['reason']
-        logging.info('CACHE HIT [%s]: %s', status, full_domain)
-        return status, reason
+    logging.info('Regions configured: %s', [h.tld for h in handlers])
 
-    # 2. Skip if this TLD already failed during this session
-    if tld in failed_tlds:
-        status = 'error'
-        reason = "Skipped (previous error in this session)"
-        logging.warning('SKIPPING %s: TLD .%s already failed earlier this run.', full_domain, tld)
-        return status, reason
+    if not os.path.exists('domains.txt'):
+        logging.error("Source file 'domains.txt' not found.")
+        return
 
-    # 3. Single attempt query with pacing
-    time.sleep(PACING_DELAY)
-    status, code, reason = check_whois(base, tld)
+    with open('domains.txt') as f:
+        bases = [l.strip() for l in f if l.strip()]
 
-    if status != 'error':
-        # SUCCESS: Add to permanent cache immediately
-        save_to_permanent_cache(base, tld, status, reason)
-    else:
-        # ERROR: Mark TLD as failed for the rest of this run
-        failed_tlds.add(tld)
-        logging.error('STOPPING FUTURE ATTEMPTS for .%s due to ERROR [%s]: %s', tld, code, reason)
+    # Run engine
+    engine = DomainCheckerEngine(handlers, repository)
+    results = engine.run(bases)
 
-    return status, reason
+    # Export results
+    with open('results.csv', 'w', newline='') as f:
+        fieldnames = ['domain', 'availability_code'] + [h.label for h in handlers]
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(results)
 
-def process_domain_row(base, tlds, countries_mask, permanent_cache, failed_tlds):
-    """Build a CSV result row for a single base domain."""
-    availability_mask = 0
-    statuses = []
-    reasons = []
+    # Finalize storage
+    repository.persist()
+    logging.info('Run completed. %d domains processed. Detailed results in results.csv', len(results))
 
-    for bit, tld, _ in tlds:
-        status, reason = resolve_domain_status(base, tld, permanent_cache, failed_tlds)
-        if status == 'available':
-            availability_mask |= bit
-        statuses.append(status)
-        reasons.append(reason)
-
-    row = [base, availability_mask]
-    row.extend(statuses)
-    row.extend(reasons)
-    return row
-
-def write_csv(results, output_file, tlds):
-    try:
-        with open(output_file, 'w', newline='') as f:
-            writer = csv.writer(f)
-            headers = ['domain', 'availability_code'] + [t[2] for t in tlds] + [f"{t[2]}_reason" for t in tlds]
-            writer.writerow(headers)
-            writer.writerows(results)
-        logging.info('Done. Results saved to %s', output_file)
-    except Exception:
-        logging.exception('Failed to write results to %s', output_file)
-
-def print_summary(results, tlds):
-    logging.info('Summary:')
-    labels = [t[2].upper() for t in tlds]
-    for row in results:
-        # row: [domain, availability_code, ...statuses, ...reasons]
-        statuses = row[2:2+len(tlds)]
-        status_str = ", ".join(f"{label}={status}" for label, status in zip(labels, statuses))
-        logging.info('%s: mask=%d, %s', row[0], row[1], status_str)
-
-def parse_args():
-    """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description='Domain availability checker.')
-    parser.add_argument('--countries', type=int, default=7,
-                        help=('Bitmask for TLDs: sum of 1 (BR), 2 (US), 4 (UK). '
-                              'Examples: 7=all, 6=UK+US, 5=UK+BR, 3=US+BR, 4=UK, 2=US, 1=BR'))
-    return parser.parse_args()
-
-def main():
-    args = parse_args()
-    initialize_environment()
-
-    input_file = 'domains.txt'
-    output_file = 'results.csv'
-
-    bases = get_bases(input_file)
-    if not bases:
-        logging.error('No domains found in %s', input_file)
-        sys.exit(1)
-
-    tlds = get_active_tlds(args.countries)
-    logging.info('Checking %d domains across %d regions ...', len(bases), len(tlds))
-
-    permanent_cache = load_permanent_cache()
-    failed_tlds = set()
-    final_results = []
-
-    for base in bases:
-        row = process_domain_row(base, tlds, args.countries, permanent_cache, failed_tlds)
-        final_results.append(row)
-
-    write_csv(final_results, output_file, tlds)
-    print_summary(final_results, tlds)
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
 
+if __name__ == "__main__":
+    main()
